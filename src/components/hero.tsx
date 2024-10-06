@@ -2,21 +2,25 @@ import { FC, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import heroImg1 from "../assets/heroImg1.webp";
 import heroImg2 from "../assets/heroImg2.webp";
+import Knee from "../assets/Knee.png";
 
 interface IHeroProps {}
 
 const Hero: FC<IHeroProps> = () => {
     const [currentImage, setCurrentImage] = useState(heroImg1);
+    const images = [heroImg1, heroImg2, Knee]; // Array of images
 
     useEffect(() => {
         const imageInterval = setInterval(() => {
-            setCurrentImage((prevImage) =>
-                prevImage === heroImg1 ? heroImg2 : heroImg1
-            );
+            setCurrentImage((prevImage) => {
+                const currentIndex = images.indexOf(prevImage);
+                const nextIndex = (currentIndex + 1) % images.length;
+                return images[nextIndex];
+            });
         }, 5000); // Change image every 5 seconds
 
         return () => clearInterval(imageInterval); // Cleanup interval on unmount
-    }, []);
+    }, [images]);
 
     return (
         <div
@@ -29,10 +33,14 @@ const Hero: FC<IHeroProps> = () => {
             }}
         >
             <motion.div
-                className="relative w-3/4 h-3/4 flex items-center justify-center"
+                className="relative flex items-center justify-center"
+                style={{
+                    width: currentImage === Knee ? "90%" : "75%", // Make Knee image bigger
+                    height: currentImage === Knee ? "90%" : "75%", // Make Knee image bigger
+                }}
                 initial={{ opacity: 0 }} // Start with opacity 0
                 animate={{ opacity: 1 }} // Fade in to opacity 1
-                transition={{ duration: 7 }} // Transition duration of 1 second
+                transition={{ duration: 7 }} // Transition duration of 7 seconds
                 key={currentImage} // Key to trigger re-render when image changes
             >
                 <img
@@ -44,7 +52,7 @@ const Hero: FC<IHeroProps> = () => {
             <div className="flex items-center justify-center absolute font-merienda">
                 <h1 className="mt-8 lg:-mt-10 text-zinc-200 text-3xl lg:text-5xl tracking-tighter">
                     Sphinx <span className="text-red-500">Muay</span> Thai
-                    <span className="text-red-500">.</span>
+                    {/* <span className="text-red-500">.</span> */}
                 </h1>
             </div>
         </div>
