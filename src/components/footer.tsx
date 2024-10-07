@@ -3,6 +3,7 @@ import logo from "../assets/logo.png";
 import facebook from "../assets/facebook.svg";
 import instagram from "../assets/instagram.svg";
 import youtube from "../assets/youtube.svg";
+///amr
 
 interface IFooterProps {}
 
