@@ -62,7 +62,7 @@ const ContactUs: FC<IContactUsProps> = ({}) => {
                                     Phone / WhatsApp
                                 </h2>
                                 <a
-                                    href="tel:+201002825696"
+                                    href="tel:+201006809882"
                                     className="text-red-100 font-semibold text-lg"
                                 >
                                     +20 100 2825696
